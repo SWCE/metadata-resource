@@ -23,7 +23,7 @@ func main() {
 		fatal("creating destination", err)
 	}
 
-	meta := make(models.Metadata)
+	meta := make(models.Metadata,5)
 
 	var request models.InRequest
 
@@ -34,11 +34,11 @@ func main() {
 
 	var inVersion = request.Version
 
-	handleProp(destination, "build-id", "BUILD_ID", meta)
-	handleProp(destination, "build-name", "BUILD_NAME", meta)
-	handleProp(destination, "build-job-name", "BUILD_JOB_NAME", meta)
-	handleProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", meta)
-	handleProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", meta)
+	handleProp(destination, "build-id", "BUILD_ID", meta, 0)
+	handleProp(destination, "build-name", "BUILD_NAME", meta, 1)
+	handleProp(destination, "build-job-name", "BUILD_JOB_NAME", meta, 2)
+	handleProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", meta, 3)
+	handleProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", meta, 4)
 
 	json.NewEncoder(os.Stdout).Encode(models.InResponse{
 		Version:  inVersion,
@@ -62,7 +62,7 @@ func fatalNoErr(doing string) {
 	os.Exit(1)
 }
 
-func handleProp(destination string, filename string, prop string, meta models.Metadata) {
+func handleProp(destination string, filename string, prop string, meta models.Metadata, index int) {
 	output := filepath.Join(destination, filename)
 	log("creating output file " + output)
 	file, err := os.Create(output)
@@ -72,7 +72,10 @@ func handleProp(destination string, filename string, prop string, meta models.Me
 	defer file.Close()
 
 	val := os.Getenv(prop)
-	meta[prop] = val
+	meta[index] = models.MetadataField{
+		Name: prop,
+		Value: val,
+	}
 	w := bufio.NewWriter(file)
 	fmt.Fprintf(w, "%s", val)
 

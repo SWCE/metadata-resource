@@ -82,21 +82,22 @@ var _ = Describe("In", func() {
 
 		It("writes the requested data the destination", func() {
 
-			checkProp(destination, "build-id", "BUILD_ID", "1", response.Metadata)
-			checkProp(destination, "build-name", "BUILD_NAME", "2", response.Metadata)
-			checkProp(destination, "build-job-name", "BUILD_JOB_NAME", "3", response.Metadata)
-			checkProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", "4", response.Metadata)
-			checkProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", "5", response.Metadata)
+			checkProp(destination, "build-id", "BUILD_ID", "1", response.Metadata[0])
+			checkProp(destination, "build-name", "BUILD_NAME", "2", response.Metadata[1])
+			checkProp(destination, "build-job-name", "BUILD_JOB_NAME", "3", response.Metadata[2])
+			checkProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", "4", response.Metadata[3])
+			checkProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", "5", response.Metadata[4])
 		})
 
 	})
 })
 
-func checkProp(destination string, filename string, prop string, valueToCheck string, meta models.Metadata) {
+func checkProp(destination string, filename string, prop string, valueToCheck string, meta models.MetadataField) {
 	output := filepath.Join(destination, filename)
 	file, err := ioutil.ReadFile(output)
 	Expect(err).NotTo(HaveOccurred())
 	val := string(file)
 	Expect(val).To(Equal(valueToCheck))
-	Expect(meta[prop]).To(Equal(valueToCheck))
+	Expect(meta.Name).To(Equal(prop))
+	Expect(meta.Value).To(Equal(valueToCheck))
 }

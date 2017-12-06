@@ -4,7 +4,12 @@ type TimestampVersion struct {
 	Version string `json:"version"`
 }
 
-type Metadata map[string]string
+type MetadataField struct {
+	Name string `json:"name"`
+	Value string `json:"value"`
+}
+
+type Metadata []MetadataField
 
 type InRequest struct {
 	Source  Source  `json:"source"`
