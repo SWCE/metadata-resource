@@ -12,7 +12,6 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
 	"path/filepath"
-	"github.com/magiconair/properties"
 )
 
 var _ = Describe("In", func() {
@@ -31,12 +30,12 @@ var _ = Describe("In", func() {
 
 		inCmd = exec.Command(inPath, destination)
 
-		inCmd.Env = append(
+		inCmd.Env = append(os.Environ(),
 			"BUILD_ID=1",
 			"BUILD_NAME=2",
 			"BUILD_JOB_NAME=3",
 			"BUILD_PIPELINE_NAME=4",
-			"ATC_EXTERNAL_URL=5"
+			"ATC_EXTERNAL_URL=5",
 		)
 	})
 
@@ -52,7 +51,7 @@ var _ = Describe("In", func() {
 
 			request = models.InRequest{
 				Version: models.TimestampVersion{
-					"version": "1"
+					Version: "1",
 				},
 				Source: models.Source{},
 			}
@@ -78,8 +77,7 @@ var _ = Describe("In", func() {
 		})
 
 		It("reports the version to be the input version", func() {
-			Expect(len(response.Version)).To(Equal(1))
-			Expect(response.Version["version"]).To(Equal("1"))
+			Expect(response.Version.Version).To(Equal("1"))
 		})
 
 		It("writes the requested data the destination", func() {
@@ -97,10 +95,7 @@ var _ = Describe("In", func() {
 func checkProp(destination string, filename string, prop string, valueToCheck string, meta models.Metadata) {
 	output := filepath.Join(destination, filename)
 	file, err := ioutil.ReadFile(output)
-	if err != nil {
-		fatal("reading output file "+output, err)
-	}
-	defer file.Close()
+	Expect(err).NotTo(HaveOccurred())
 	val := string(file)
 	Expect(val).To(Equal(valueToCheck))
 	Expect(meta[prop]).To(Equal(valueToCheck))

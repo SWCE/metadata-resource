@@ -1,17 +1,13 @@
 package main_test
 
 import (
-	"bytes"
-	"encoding/json"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
-	"github.com/swce/metadata-resource/models"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
-	"bufio"
 	"fmt"
 	"github.com/onsi/gomega/gbytes"
 )
@@ -20,6 +16,7 @@ var _ = Describe("Out", func() {
 	var tmpdir string
 	var source string
 
+	var session *gexec.Session
 	var outCmd *exec.Cmd
 
 	BeforeEach(func() {
@@ -41,9 +38,9 @@ var _ = Describe("Out", func() {
 	Context("when executed", func() {
 
 		JustBeforeEach(func() {
-			stdin := new(bytes.Buffer)
+			var err error
 
-			session, err := gexec.Start(outCmd, GinkgoWriter, GinkgoWriter)
+			session, err = gexec.Start(outCmd, GinkgoWriter, GinkgoWriter)
 			Expect(err).NotTo(HaveOccurred())
 		})
 

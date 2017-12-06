@@ -17,14 +17,11 @@ func main() {
 		fmt.Fprintln(os.Stderr, "parse error:", err.Error())
 		os.Exit(1)
 	}
-	t := strconv.Itoa(time.Now().UnixNano())
-	models.InResponse{
-		Version:  inVersion,
-	}
+	t := strconv.FormatInt(time.Now().UnixNano(),10)
 	versions := models.CheckResponse {
 		models.TimestampVersion {
-			Version: t
-		}
+			Version: t,
+		},
 	}
 	json.NewEncoder(os.Stdout).Encode(versions)
 }

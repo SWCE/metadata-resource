@@ -4,12 +4,10 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
-	"strconv"
 
 	"github.com/swce/metadata-resource/models"
 	"fmt"
 	"bufio"
-	"sort"
 )
 
 func main() {
@@ -34,7 +32,7 @@ func main() {
 		fatal("reading request", err)
 	}
 
-	var inVersion = request.TimestampVersion
+	var inVersion = request.Version
 
 	handleProp(destination, "build-id", "BUILD_ID", meta)
 	handleProp(destination, "build-name", "BUILD_NAME", meta)
@@ -44,7 +42,7 @@ func main() {
 
 	json.NewEncoder(os.Stdout).Encode(models.InResponse{
 		Version:  inVersion,
-		Metadata: meta
+		Metadata: meta,
 	})
 
 	log("Done")

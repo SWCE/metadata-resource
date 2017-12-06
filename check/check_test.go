@@ -64,7 +64,7 @@ var _ = Describe("Check", func() {
 
 			BeforeEach(func() {
 				version = &models.TimestampVersion{
-					Version: "1"
+					Version: "1",
 				}
 			})
 
