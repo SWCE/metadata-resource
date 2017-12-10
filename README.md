@@ -170,7 +170,7 @@ The `prod-deploy` task:
         echo "Promoting build to production repo"
         local appName=$(retrieveAppName)
         local args="{\"status\": \"Deployed\",\"comment\": \"moving to production\",\"copy\": true,\"sourceRepo\": \"${REPO_SNAPSHOT}\",\"targetRepo\": \"${REPO_RELEASE}\",\"properties\": {\"retention.pinned\":[\"7\"]}}"
-        curl -u "${artifactory_user}:${artifactory_password}" -H "Content-Type: application/json" -X POST -d "$args" "${artifactory_contextUrl}/api/build/promote/${appName}/${PASSED_PIPELINE_ID}"
+        curl --fail -u "${artifactory_user}:${artifactory_password}" -H "Content-Type: application/json" -X POST -d "'$args'" "${artifactory_contextUrl}/api/build/promote/${appName}/${PASSED_PIPELINE_ID}"
 
 ```
 
