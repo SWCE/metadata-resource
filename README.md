@@ -10,7 +10,7 @@
 
 Implements a resource that passes to a task the metadata of the job.
 
-Caution: misuse may result in angry concourse developers. This resource was created for the sole purpose of linking the artifactory artifacts to the current build.
+Caution: misuse may result in angry concourse developers. This resource was created for the sole purpose of linking the Artifactory artifacts to the current build.
 
 Opinionated pipeline suggestion [here](#opinionated-pipeline)
 
@@ -92,7 +92,7 @@ The build job gets in the `meta` dir all the files with the respected values in 
 
 Use this resource to link the artifacts created by the build step to the current build. This is helpfull in a couple of ways: 
  - Artifactory will show the build number in the metadata of the artifacts, which helps understanding which build created the artifacts.
- - When working with snapshots and production artifactory repositories, we can easily promote the artifacts of the build from snapshot to production without the need to realize all the artifacts created by the build and copying them one by one. This is dony using the promote api call of artifactory.
+ - When working with snapshots and production artifactory repositories, we can easily promote the artifacts of the build from snapshot to production without the need to realize all the artifacts created by the build and copying them one by one. This is done using the promote api call of Artifactory.
  
 We will use the [keyval-resource](https://github.com/swce/keyval-resource) to pass the build number to the step that will release the artifact to production.
 
