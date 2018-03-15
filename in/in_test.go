@@ -35,7 +35,8 @@ var _ = Describe("In", func() {
 			"BUILD_NAME=2",
 			"BUILD_JOB_NAME=3",
 			"BUILD_PIPELINE_NAME=4",
-			"ATC_EXTERNAL_URL=5",
+			"BUILD_TEAM_NAME=5",
+			"ATC_EXTERNAL_URL=6",
 		)
 	})
 
@@ -86,7 +87,8 @@ var _ = Describe("In", func() {
 			checkProp(destination, "build-name", "BUILD_NAME", "2", response.Metadata[1])
 			checkProp(destination, "build-job-name", "BUILD_JOB_NAME", "3", response.Metadata[2])
 			checkProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", "4", response.Metadata[3])
-			checkProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", "5", response.Metadata[4])
+			checkProp(destination, "build-team-name", "BUILD_TEAM_NAME", "5", response.Metadata[4])
+			checkProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", "6", response.Metadata[5])
 		})
 
 	})

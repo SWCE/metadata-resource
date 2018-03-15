@@ -23,7 +23,7 @@ func main() {
 		fatal("creating destination", err)
 	}
 
-	meta := make(models.Metadata,5)
+	meta := make(models.Metadata,6)
 
 	var request models.InRequest
 
@@ -38,7 +38,8 @@ func main() {
 	handleProp(destination, "build-name", "BUILD_NAME", meta, 1)
 	handleProp(destination, "build-job-name", "BUILD_JOB_NAME", meta, 2)
 	handleProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", meta, 3)
-	handleProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", meta, 4)
+	handleProp(destination, "build-team-name", "BUILD_TEAM_NAME", meta, 4)
+	handleProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", meta, 5)
 
 	json.NewEncoder(os.Stdout).Encode(models.InResponse{
 		Version:  inVersion,

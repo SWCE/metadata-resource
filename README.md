@@ -48,6 +48,7 @@ Produce the current timestamp to invalidate the previous version so every build 
  - "$BUILD_NAME" > build-name
  - "$BUILD_JOB_NAME" > build-job-name
  - "$BUILD_PIPELINE_NAME" > build-pipeline-name
+ - "$BUILD_TEAM_NAME" > build-team-name
  - "$ATC_EXTERNAL_URL" > atc-external-url 
 
 #### Parameters
