@@ -89,6 +89,8 @@ var _ = Describe("In", func() {
 			checkProp(destination, "build-pipeline-name", "BUILD_PIPELINE_NAME", "4", response.Metadata[3])
 			checkProp(destination, "build-team-name", "BUILD_TEAM_NAME", "5", response.Metadata[4])
 			checkProp(destination, "atc-external-url", "ATC_EXTERNAL_URL", "6", response.Metadata[5])
+			checkProp(destination, "build-url", "BUILD_URL", "6/teams/5/pipelines/4/jobs/3/builds/2", response.Metadata[6])
+			checkProp(destination, "build-url-short", "BUILD_URL_SHORT", "6/builds/1", response.Metadata[7])
 		})
 
 	})
