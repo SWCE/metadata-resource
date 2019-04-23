@@ -55,7 +55,7 @@ Produce the current timestamp to invalidate the previous version so every build 
 
 *None.*
 
-### `out`: Unsed
+### `out`: Unused
 
 Unused
 
