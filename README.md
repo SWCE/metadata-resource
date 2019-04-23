@@ -6,6 +6,7 @@
 
 [![dockeri.co](http://dockeri.co/image/swce/metadata-resource)](https://hub.docker.com/r/swce/metadata-resource/)
 
+
 # Concourse CI Metadata Resource
 
 Implements a resource that passes to a task the metadata of the job.
