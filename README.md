@@ -50,6 +50,8 @@ Produce the current timestamp to invalidate the previous version so every build 
  - "$BUILD_PIPELINE_NAME" > build-pipeline-name
  - "$BUILD_TEAM_NAME" > build-team-name
  - "$ATC_EXTERNAL_URL" > atc-external-url 
+ - "$ATC_EXTERNAL_URL/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME" > build-url (this is a URL to the build)
+ - "$ATC_EXTERNAL_URL/builds/$BUILD_ID" > build-url-short (this is a shorter URL to the build)
 
 #### Parameters
 
