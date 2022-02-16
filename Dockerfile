@@ -1,6 +1,7 @@
 FROM golang:alpine as builder
 COPY . /go/src/github.com/swce/metadata-resource
 ENV CGO_ENABLED 0
+RUN go env -w GO111MODULE=off
 ENV GOPATH /go/src/github.com/swce/metadata-resource/Godeps/_workspace:${GOPATH}
 ENV PATH /go/src/github.com/swce/metadata-resource/Godeps/_workspace/bin:${PATH}
 RUN go build -o /assets/out github.com/swce/metadata-resource/out
